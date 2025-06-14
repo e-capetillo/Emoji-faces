@@ -75,7 +75,7 @@ if uploaded_file:
             if pos_y > alto_imagen - 10:
                 pos_y = y2 - 10
             
-            cv2.putText(imagen_mostrar, f"ID {i}", (pos_x, pos_y), cv2.FONT_HERSHEY_SIMPLEX, font_scale, (255,0,0), grosor)
+            cv2.putText(imagen_mostrar, f"#{i}", (pos_x, pos_y), cv2.FONT_HERSHEY_SIMPLEX, font_scale, (255,0,0), grosor)
 
         st.image(cv2.cvtColor(imagen_mostrar, cv2.COLOR_BGR2RGB), caption="Caras detectadas (ID debajo)")
 
