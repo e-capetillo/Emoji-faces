@@ -49,7 +49,9 @@ if uploaded_file:
         for i, box in enumerate(caras):
             x1, y1, x2, y2 = map(int, box.xyxy[0])
             cv2.rectangle(imagen_mostrar, (x1, y1), (x2, y2), (0,255,0), 2)
-            cv2.putText(imagen_mostrar, f"ID {i}", (x1, y2 + 30), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255,0,0), 4)
+            alto_imagen = imagen_mostrar.shape[0]
+            font_scale = alto_imagen / 600  # Ajusta 600 a un valor que te guste como base
+            cv2.putText(imagen_mostrar, f"ID {i}", (x1, y2 + 30), cv2.FONT_HERSHEY_SIMPLEX, font_scale, (255,0,0), 2)
         st.image(cv2.cvtColor(imagen_mostrar, cv2.COLOR_BGR2RGB), caption="Caras detectadas (ID debajo)")
 
         # Selector múltiple para seleccionar IDs a modificar
