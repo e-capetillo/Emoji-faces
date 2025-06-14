@@ -49,13 +49,8 @@ if uploaded_file:
         for i, box in enumerate(caras):
             x1, y1, x2, y2 = map(int, box.xyxy[0])
             cv2.rectangle(imagen_mostrar, (x1, y1), (x2, y2), (0,255,0), 2)
-            cv2.putText(imagen_mostrar, f"ID {i}", (x1, y2 + 25), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,0,0), 2)
+            cv2.putText(imagen_mostrar, f"ID {i}", (x1, y2 + 30), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255,0,0), 4)
         st.image(cv2.cvtColor(imagen_mostrar, cv2.COLOR_BGR2RGB), caption="Caras detectadas (ID debajo)")
-
-        # Mostrar IDs más grandes y centrados debajo (en columnas)
-        cols = st.columns(len(caras))
-        for i, col in enumerate(cols):
-            col.markdown(f"<h3 style='text-align:center;'>ID: {i}</h3>", unsafe_allow_html=True)
 
         # Selector múltiple para seleccionar IDs a modificar
         ids_seleccionados = st.multiselect(
