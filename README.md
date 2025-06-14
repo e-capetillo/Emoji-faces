@@ -47,8 +47,7 @@ pip install -r requirements.txt
 
 Ejecuta la app:
 
-```
-bash
+```bash
 Copiar
 Editar
 streamlit run emoji_faces_app.py
