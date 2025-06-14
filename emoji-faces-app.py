@@ -86,11 +86,12 @@ if uploaded_file:
         st.image(cv2.cvtColor(imagen_mostrar, cv2.COLOR_BGR2RGB), caption="Caras detectadas (ID debajo)")
 
         # Selector múltiple de caras
-        ids_seleccionados = st.multiselect(
-            "Selecciona las caras a las que quieres aplicar emojis (IDs):",
-            options=list(range(len(caras))),
-            default=list(range(len(caras)))
-        )
+        st.markdown("### ✅ Selección de caras")
+        ids_seleccionados = []
+        with st.expander("Haz clic para seleccionar las caras que quieres modificar"):
+            for i in range(len(caras)):
+                if st.checkbox(f"Aplicar emoji a cara #{i}", value=True, key=f"cara_{i}"):
+                    ids_seleccionados.append(i)
 
         # Selector de categoría de emojis
         categoria = st.selectbox("Selecciona la categoría de emojis:", categorias)
