@@ -44,49 +44,27 @@ if uploaded_file:
     if len(caras) == 0:
         st.warning("No se detectaron caras en la imagen.")
     else:
+        # Mostrar imagen con cuadros y IDs (en la imagen)
         imagen_mostrar = imagen_bgr.copy()
-        alto_imagen, ancho_imagen = imagen_mostrar.shape[:2]
-
         for i, box in enumerate(caras):
-            # Validar que la caja tenga datos válidos
-            if box.xyxy is None or len(box.xyxy) == 0:
-                continue
-            coords = box.xyxy[0]
-            if len(coords) < 4:
-                continue
-            
-            # Convertir y limitar las coordenadas
-            x1, y1, x2, y2 = map(int, coords)
-            x1 = max(0, min(x1, ancho_imagen - 1))
-            x2 = max(0, min(x2, ancho_imagen - 1))
-            y1 = max(0, min(y1, alto_imagen - 1))
-            y2 = max(0, min(y2, alto_imagen - 1))
-
-            # Dibujar rectángulo
+            x1, y1, x2, y2 = map(int, box.xyxy[0])
             cv2.rectangle(imagen_mostrar, (x1, y1), (x2, y2), (0,255,0), 2)
-            
-            # Texto con tamaño fijo para evitar errores
-            font_scale = 1.0
-            grosor = 2
-            
-            # Posición del texto: si no cabe abajo, poner arriba
-            pos_x = x1
-            pos_y = y2 + 30
-            if pos_y > alto_imagen - 10:
-                pos_y = y2 - 10
-            
-            cv2.putText(imagen_mostrar, f"ID {i}", (pos_x, pos_y), cv2.FONT_HERSHEY_SIMPLEX, font_scale, (255,0,0), grosor)
-
+            cv2.putText(imagen_mostrar, f"ID {i}", (x1, y2 + 25), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,0,0), 2)
         st.image(cv2.cvtColor(imagen_mostrar, cv2.COLOR_BGR2RGB), caption="Caras detectadas (ID debajo)")
 
-        # Selector múltiple para elegir IDs
+        # Mostrar IDs más grandes y centrados debajo (en columnas)
+        cols = st.columns(len(caras))
+        for i, col in enumerate(cols):
+            col.markdown(f"<h3 style='text-align:center;'>ID: {i}</h3>", unsafe_allow_html=True)
+
+        # Selector múltiple para seleccionar IDs a modificar
         ids_seleccionados = st.multiselect(
             "Selecciona las caras a las que quieres aplicar emojis (IDs):",
             options=list(range(len(caras))),
             default=list(range(len(caras)))
         )
 
-        # Selector de categoría de emojis
+        # Selector de categoría
         categoria = st.selectbox("Selecciona la categoría de emojis:", categorias)
         
         # Botón para aplicar emojis
@@ -104,8 +82,7 @@ if uploaded_file:
                 if i not in ids_seleccionados:
                     continue
                 
-                coords = box.xyxy[0]
-                x1, y1, x2, y2 = map(int, coords)
+                x1, y1, x2, y2 = map(int, box.xyxy[0])
                 ancho = x2 - x1
                 alto = y2 - y1
                 
@@ -129,7 +106,7 @@ if uploaded_file:
             
             st.image(imagen_pil, caption="Imagen con emojis aplicados")
             
-            # Botón para descargar la imagen final
+            # Botón para descargar imagen
             buffered = io.BytesIO()
             imagen_pil.save(buffered, format="PNG")
             st.download_button(
