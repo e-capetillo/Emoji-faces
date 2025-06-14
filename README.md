@@ -28,28 +28,36 @@ Hugging Face Hub
 ## 📦 Instalación
 Clona el repositorio:
 
-bash
+```bash
 Copiar
 Editar
 git clone https://github.com/tu-usuario/emoji-faces-app.git
 cd emoji-faces-app
+```
+
 Crea un entorno virtual e instala dependencias:
 
-bash
+```bash
 Copiar
 Editar
 python -m venv venv
 source venv/bin/activate  # En Windows: venv\Scripts\activate
 pip install -r requirements.txt
+```
+
 Ejecuta la app:
 
+```
 bash
 Copiar
 Editar
 streamlit run emoji_faces_app.py
+```
+
 ## 📁 Estructura de Emojis
 Coloca tus emojis en carpetas por categoría dentro de una carpeta raíz. Ejemplo:
 
+```
 Copiar
 Editar
 emojis/
@@ -60,6 +68,7 @@ emojis/
 │   └── angry.png
 ## ✨ Demo
 <!-- Sustituye por tu imagen o gif -->
+```
 
 ## 📄 Licencia
 Este proyecto está bajo la licencia MIT. Consulta el archivo LICENSE para más información.
