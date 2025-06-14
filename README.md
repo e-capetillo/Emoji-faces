@@ -1,9 +1,9 @@
-🧠 Emoji Faces App
+# 🧠 Emoji Faces App
 Aplicación web construida con Streamlit que detecta rostros en imágenes usando YOLOv8 y permite superponer emojis personalizados en cada cara detectada. Ideal para experimentar con visión por computadora de una forma divertida y creativa.
 
 <!-- Puedes poner un gif o imagen aquí si tienes -->
 
-🚀 Características
+## 🚀 Características
 Detección rápida y precisa de rostros con YOLOv8.
 
 Visualización de resultados en tiempo real desde la interfaz web.
@@ -14,7 +14,7 @@ Interfaz intuitiva y fácil de usar.
 
 Descarga de la imagen final con los emojis aplicados.
 
-🛠️ Tecnologías
+## 🛠️ Tecnologías
 Streamlit
 
 YOLOv8
@@ -25,7 +25,7 @@ Pillow
 
 Hugging Face Hub
 
-📦 Instalación
+## 📦 Instalación
 Clona el repositorio:
 
 bash
@@ -47,7 +47,7 @@ bash
 Copiar
 Editar
 streamlit run emoji_faces_app.py
-📁 Estructura de Emojis
+## 📁 Estructura de Emojis
 Coloca tus emojis en carpetas por categoría dentro de una carpeta raíz. Ejemplo:
 
 Copiar
@@ -58,9 +58,9 @@ emojis/
 │   └── wink.png
 ├── enojado/
 │   └── angry.png
-✨ Demo
+## ✨ Demo
 <!-- Sustituye por tu imagen o gif -->
 
-📄 Licencia
+## 📄 Licencia
 Este proyecto está bajo la licencia MIT. Consulta el archivo LICENSE para más información.
 
