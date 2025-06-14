@@ -46,12 +46,22 @@ if uploaded_file:
     else:
         # Mostrar imagen con cuadros y IDs (en la imagen)
         imagen_mostrar = imagen_bgr.copy()
+        alto_imagen = imagen_mostrar.shape[0]
+
         for i, box in enumerate(caras):
             x1, y1, x2, y2 = map(int, box.xyxy[0])
             cv2.rectangle(imagen_mostrar, (x1, y1), (x2, y2), (0,255,0), 2)
-            alto_imagen = imagen_mostrar.shape[0]
-            font_scale = alto_imagen / 600  # Ajusta 600 a un valor que te guste como base
-            cv2.putText(imagen_mostrar, f"ID {i}", (x1, y2 + 30), cv2.FONT_HERSHEY_SIMPLEX, font_scale, (255,0,0), 2)
+    
+            # Calcular font_scale con límites para que no sea muy pequeño ni muy grande
+            font_scale = max(min(alto_imagen / 600, 2.0), 0.5)
+            grosor = max(1, int(font_scale * 2))
+    
+            # Ajustar posición para que el texto no quede fuera de la imagen
+            pos_x = x1
+            pos_y = min(y2 + int(30 * font_scale), alto_imagen - 10)
+    
+            cv2.putText(imagen_mostrar, f"ID {i}", (pos_x, pos_y), cv2.FONT_HERSHEY_SIMPLEX, font_scale, (255,0,0), grosor)
+
         st.image(cv2.cvtColor(imagen_mostrar, cv2.COLOR_BGR2RGB), caption="Caras detectadas (ID debajo)")
 
         # Selector múltiple para seleccionar IDs a modificar
